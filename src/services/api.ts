@@ -50,16 +50,23 @@ async function tryOrFallback<T>(
  * Checks the status of a flight and returns the city, delay info, etc.
  * Falls back to mock data on failure.
  */
-export async function checkFlightStatus(
-  flightNumber: string,
-  date: string
-): Promise<FlightStatusResponse> {
+export async function checkFlightStatus(opts: {
+  flightNumber: string;
+  date: string;
+  connectionDepartureUtc: string;
+  weatherInfo: { degree: number; status: string };
+}): Promise<FlightStatusResponse> {
   return tryOrFallback(
     async () => {
-      const res = await fetch(`${API_BASE_URL}/api/check-flight`, {
+      const res = await fetch(`${API_BASE_URL}/check-flight`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ flight_number: flightNumber, date }),
+        body: JSON.stringify({
+          flight_number: opts.flightNumber,
+          date: opts.date,
+          connection_departure_utc: opts.connectionDepartureUtc,
+          weather_info: opts.weatherInfo,
+        }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
@@ -78,7 +85,7 @@ export async function getCityImage(city: string): Promise<CityImageResponse> {
   return tryOrFallback(
     async () => {
       const res = await fetch(
-        `${API_BASE_URL}/api/get-city-image?city=${encodeURIComponent(city)}`
+        `${API_BASE_URL}/get-city-image?city=${encodeURIComponent(city)}`
       );
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return res.json();
@@ -112,7 +119,7 @@ export async function generateItinerary(opts: {
 
   return tryOrFallback(
     async () => {
-      const res = await fetch(`${API_BASE_URL}/api/generate-itinerary`, {
+      const res = await fetch(`${API_BASE_URL}/generate-itinerary`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

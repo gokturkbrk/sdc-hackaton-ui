@@ -16,7 +16,9 @@ The UI currently calls:
 ```json
 {
   "flight_number": "LH404",
-  "date": "2026-03-01"
+  "date": "2026-03-01",
+  "connection_departure_utc": "2026-03-01T19:00:00Z",
+  "weather_info": { "degree": 8, "status": "cloudy" }
 }
 ```
 
@@ -144,7 +146,9 @@ The endpoint always requires `flight_status` and `form_data`. For editing, addit
     "budget": "budget_low"
   },
   "previous_itinerary": {
-    /* full ItineraryResponse object */
+    "stay_at_airport": false,
+    "safe_window_minutes": 325,
+    "itinerary": []
   },
   "user_prompt": "Add a coffee stop near Puerta del Sol"
 }

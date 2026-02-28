@@ -26,24 +26,16 @@ const getCategoryIcon = (category: string) => {
     case 'sightseeing':
     case 'culture':
       return <Landmark size={12} />;
+    case 'wander':
+      return <Compass size={12} />;
     default:
       return <Compass size={12} />;
   }
 };
 
-/** Format a minute offset into a human-readable duration label like "+0h 45m" */
-const formatMinuteOffset = (minutes: number) => {
-  const h = Math.floor(minutes / 60);
-  const m = minutes % 60;
-  if (h === 0) return `+${m}m`;
-  if (m === 0) return `+${h}h`;
-  return `+${h}h ${m}m`;
-};
-
-/** Format cost as a euro string */
-const formatCost = (cost: number) => {
-  if (cost === 0) return 'Free';
-  return `€${cost}`;
+const formatTime = (utcString: string) => {
+  const date = new Date(utcString);
+  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 };
 
 export function ResponseView({ itinerary, onEditItinerary }: { itinerary: ItineraryResponse; onEditItinerary: (userPrompt: string) => Promise<void> }) {
@@ -206,11 +198,13 @@ export function ResponseView({ itinerary, onEditItinerary }: { itinerary: Itiner
                         >
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2 text-sm font-bold text-rust-500 bg-rust-50 px-2.5 py-1 rounded-md">
-                              {getCategoryIcon(item.category)} {formatMinuteOffset(item.start_utc)}
+                              {getCategoryIcon(item.category)} {formatTime(item.start_utc)}
                             </div>
-                            <span className="text-xs font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-md">
-                              {formatCost(item.estimated_cost)}
-                            </span>
+                            {item.estimated_cost && item.estimated_cost !== '0 EUR' && (
+                              <span className="text-xs font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-md">
+                                {item.estimated_cost}
+                              </span>
+                            )}
                           </div>
                           
                           <p className="font-bold text-lg text-stone-900 leading-tight mb-1 group-hover:text-rust-600 transition-colors">{item.activity_name}</p>
@@ -232,12 +226,17 @@ export function ResponseView({ itinerary, onEditItinerary }: { itinerary: Itiner
                                   <p className="text-sm text-stone-600 leading-relaxed mb-3">
                                     {item.description}
                                   </p>
+                                  {item.transport_to_next && (
+                                    <div className="flex items-center gap-2 text-xs font-medium text-stone-500 bg-stone-50 p-2 rounded-lg border border-stone-100 mb-3">
+                                       <Train size={14} className="text-stone-400" /> {item.transport_to_next}
+                                    </div>
+                                  )}
                                   <a 
                                     href={item.google_maps_url} 
                                     target="_blank" 
                                     rel="noreferrer"
                                     onClick={(e) => e.stopPropagation()}
-                                    className="mt-3 block text-center w-full py-2 bg-stone-100 text-stone-700 rounded-xl text-sm font-semibold hover:bg-stone-200 transition-colors"
+                                    className="block text-center w-full py-2 bg-stone-100 text-stone-700 rounded-xl text-sm font-semibold hover:bg-stone-200 transition-colors"
                                   >
                                     View on Map
                                   </a>

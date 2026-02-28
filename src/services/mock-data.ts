@@ -20,21 +20,23 @@ export type CityImageResponse = {
 };
 
 export type ItineraryItem = {
-  /** Minutes offset from the start of the itinerary window */
-  start_utc: number;
-  /** Minutes offset from the start of the itinerary window */
-  end_utc: number;
+  /** ISO 8601 UTC datetime string */
+  start_utc: string;
+  /** ISO 8601 UTC datetime string */
+  end_utc: string;
   activity_name: string;
   venue_name: string;
   category: string;
-  /** Cost in euros as a number (0 = free) */
-  estimated_cost: number;
-  /** Google Place ID (e.g. "ChIJ...") or null */
+  /** Cost as a string, e.g. "5-10 EUR", "0 EUR" */
+  estimated_cost: string;
+  /** Google Place ID or CID, or null */
   place_id: string | null;
   latitude: number;
   longitude: number;
   google_maps_url: string;
   description: string;
+  /** Description of how to get to the next activity, or null */
+  transport_to_next: string | null;
 };
 
 export type ItineraryResponse = {
@@ -79,33 +81,39 @@ export const MOCK_CITY_IMAGES: Record<string, string> = {
 
 export const MOCK_ITINERARY: ItineraryResponse = itineraryMockData as ItineraryResponse;
 
-/** Mock edited itinerary — simulates AI inserting an extra sightseeing stop */
+/** Mock edited itinerary — simulates AI inserting an extra food stop */
 export const MOCK_EDITED_ITINERARY: ItineraryResponse = {
   ...MOCK_ITINERARY,
   itinerary: [
-    // Keep first item (transport to city center)
+    // Keep first item (transport)
     MOCK_ITINERARY.itinerary[0],
-    // Keep coffee break
-    MOCK_ITINERARY.itinerary[1],
-    // Inserted extra sightseeing stop
+    // Inserted coffee stop
     {
-      start_utc: 75,
-      end_utc: 105,
-      activity_name: 'Visit Mercado de San Miguel',
-      venue_name: 'Mercado de San Miguel',
-      category: 'food_drink',
-      estimated_cost: 15,
-      place_id: 'ChIJKUhBP0omQg0RcHHhggF3yno',
-      latitude: 40.4154,
-      longitude: -3.7083,
-      google_maps_url: 'https://maps.google.com/?q=Mercado+de+San+Miguel+Madrid',
-      description: 'Browse artisan food stalls and try local delicacies at this historic covered market near Plaza Mayor.',
+      start_utc: '2026-02-28T18:49:00Z',
+      end_utc: '2026-02-28T19:19:00Z',
+      activity_name: 'Coffee Break',
+      venue_name: 'Café de la Luz',
+      category: 'food',
+      estimated_cost: '5-8 EUR',
+      place_id: null,
+      latitude: 40.4175,
+      longitude: -3.7010,
+      google_maps_url: 'https://maps.google.com/?q=Café+de+la+Luz+Madrid',
+      description: 'Charming café near Lavapiés, perfect for a quick coffee and pastry.',
+      transport_to_next: 'Walk (approx. 5 min)',
     },
-    // Rest of original items with adjusted minute offsets (+30 min)
-    ...MOCK_ITINERARY.itinerary.slice(2).map((item) => ({
+    // Rest of original items with shifted times (+30 min)
+    ...MOCK_ITINERARY.itinerary.slice(1).map((item) => ({
       ...item,
-      start_utc: item.start_utc + 30,
-      end_utc: item.end_utc + 30,
+      start_utc: shiftTime(item.start_utc, 30),
+      end_utc: shiftTime(item.end_utc, 30),
     })),
   ],
 };
+
+/** Helper: shift a UTC time string by N minutes */
+function shiftTime(utcString: string, minutes: number): string {
+  const d = new Date(utcString);
+  d.setMinutes(d.getMinutes() + minutes);
+  return d.toISOString();
+}

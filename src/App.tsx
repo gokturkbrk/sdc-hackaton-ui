@@ -31,7 +31,12 @@ export default function App() {
   });
 
   const handleCheckFlight = async () => {
-    const result = await checkFlightStatus('LH404', '2026-03-01');
+    const result = await checkFlightStatus({
+      flightNumber: 'LH404',
+      date: '2026-03-01',
+      connectionDepartureUtc: '2026-03-01T19:00:00Z',
+      weatherInfo: { degree: 8, status: 'cloudy' },
+    });
     setFlightStatusResponse(result);
     setFlightStatus({
       status: result.status,
