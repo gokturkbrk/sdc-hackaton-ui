@@ -1,0 +1,72 @@
+{
+    "stay_at_airport": false,
+    "safe_window_minutes": 325,
+    "itinerary": [
+        {
+            "start_utc": 0,
+            "end_utc": 45,
+            "activity_name": "Travel to City Center",
+            "venue_name": "Madrid-Barajas Adolfo Suárez Airport (MAD) to Sol",
+            "category": "transport",
+            "estimated_cost": 10,
+            "place_id": null,
+            "latitude": 40.416775,
+            "longitude": -3.70379,
+            "google_maps_url": "https://maps.google.com/?q=Madrid+City+Center",
+            "description": "Take the Airport Express Bus from Terminal 4 to Atocha Station, then a short taxi ride or accessible public transport to the Puerta del Sol area. The bus is generally wheelchair accessible."
+        },
+        {
+            "start_utc": 45,
+            "end_utc": 75,
+            "activity_name": "Coffee Break",
+            "venue_name": "Café & Té",
+            "category": "food_drink",
+            "estimated_cost": 8,
+            "place_id": "ChIJ05g_250mQg0R712-l-622vY",
+            "latitude": 40.417409,
+            "longitude": -3.706179,
+            "google_maps_url": "https://maps.google.com/?q=Caf%C3%A9+%26+T%C3%A9+Calle+Mayor+1+Madrid",
+            "description": "Enjoy a refreshing coffee or tea at this accessible cafe, conveniently located just steps away from Puerta del Sol."
+        },
+        {
+            "start_utc": 75,
+            "end_utc": 135,
+            "activity_name": "Explore Puerta del Sol & Plaza Mayor",
+            "venue_name": "Puerta del Sol & Plaza Mayor",
+            "category": "sightseeing",
+            "estimated_cost": 0,
+            "place_id": "ChIJQy3_R00mQg0R_h9g2e_j_4Q",
+            "latitude": 40.4169,
+            "longitude": -3.7035,
+            "google_maps_url": "https://maps.google.com/?q=Puerta+del+Sol+Madrid",
+            "description": "Immerse yourselves in the vibrant atmosphere of Puerta del Sol, see the iconic Bear and the Strawberry Tree statue, and then roll over to the grand Plaza Mayor, enjoying the historic architecture and street performers. Both areas are pedestrian-friendly and relatively flat."
+        },
+        {
+            "start_utc": 135,
+            "end_utc": 195,
+            "activity_name": "Vegetarian Lunch",
+            "venue_name": "Lateral Santa Ana",
+            "category": "food_drink",
+            "estimated_cost": 20,
+            "place_id": "ChIJ327q410mQg0Rz0V9e_j_4Q",
+            "latitude": 40.4144,
+            "longitude": -3.7009,
+            "google_maps_url": "https://maps.google.com/?q=Lateral+Santa+Ana+Plaza+de+Santa+Ana+12+Madrid",
+            "description": "Savor a delicious vegetarian tapas lunch at Lateral Santa Ana, known for its modern take on Spanish cuisine and accessible environment, offering a variety of plant-based options."
+        },
+        {
+            "start_utc": 195,
+            "end_utc": 240,
+            "activity_name": "Travel to Airport",
+            "venue_name": "Sol to Madrid-Barajas Adolfo Suárez Airport (MAD)",
+            "category": "transport",
+            "estimated_cost": 10,
+            "place_id": null,
+            "latitude": 40.4936,
+            "longitude": -3.5668,
+            "google_maps_url": "https://maps.google.com/?q=Madrid-Barajas+Adolfo+Su%C3%A1rez+Airport",
+            "description": "Return to the airport using the Airport Express Bus from Atocha Station, or via Metro/Cercanias, ensuring ample time for security and boarding."
+        }
+    ]
+}
+ 

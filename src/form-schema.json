@@ -1,0 +1,68 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "field": "groupSize",
+      "title": "Who’s traveling?",
+      "subtitle": "Tell me your group size",
+      "type": "single-select",
+      "options": [
+        { "id": "solo", "label": "Just me" },
+        { "id": "duo", "label": "Two people" },
+        { "id": "group", "label": "Three or more" }
+      ]
+    },
+    {
+      "id": "q2",
+      "field": "activities",
+      "title": "What is the mood?",
+      "subtitle": "Pick your preference",
+      "type": "single-select",
+      "options": [
+        { "id": "wander", "label": "Wander & Explore" },
+        { "id": "chill", "label": "Chill & Relax" },
+        { "id": "active", "label": "Active & Adventure" }
+      ]
+    },
+    {
+      "id": "q3",
+      "field": "foodConstraints",
+      "title": "Any dietary restrictions?",
+      "subtitle": "Select the one that best fits your need",
+      "type": "single-select",
+      "options": [
+        { "id": "none", "label": "None" },
+        { "id": "vegetarian", "label": "Vegetarian" },
+        { "id": "vegan", "label": "Vegan" },
+        { "id": "halal", "label": "Halal" },
+        { "id": "kosher", "label": "Kosher" }
+      ]
+    },
+    {
+      "id": "q4",
+      "field": "accessibility",
+      "title": "Accessibility needs?",
+      "subtitle": "Help us find the right places",
+      "type": "single-select",
+      "options": [
+        { "id": "none", "label": "None" },
+        { "id": "wheelchair", "label": "Wheelchair accessible" },
+        { "id": "less_walking", "label": "Minimal walking" },
+        { "id": "no_stairs", "label": "Avoid stairs" }
+      ]
+    },
+    {
+      "id": "q5",
+      "field": "budget",
+      "title": "Budget per person?",
+      "subtitle": "Average spending on food & activities",
+      "type": "single-select",
+      "options": [
+        { "id": "free", "label": "Free options" },
+        { "id": "budget_low", "label": "Less than 50€" },
+        { "id": "no_limit", "label": "No threshold" }
+      ]
+    }
+  ]
+}
+
